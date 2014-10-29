@@ -1,10 +1,12 @@
 
-#Script pour l'importation de séquences et l'alignement
+#Script pour l'importation de sï¿½quences et l'alignement
 # Le signe diese faire shift 3
-# le signe \ doit toujours être doublé car sinon en programmation, il annonce les caractères suivants donc mettre \\
+# le signe \ doit toujours ï¿½tre doublï¿½ car sinon en programmation, il annonce les caractï¿½res suivants donc mettre \\
 # []-les bracquets se font avec altcar et 9, 0
 # les doubles guillemets-shift+point
-#Écrire-le nom de la fonction sans parenthèse et on a le code source qui s'affiche
+#ï¿½crire-le nom de la fonction sans parenthï¿½se et on a le code source qui s'affiche
+
+modif2
 
 setwd("~/Rcran/Alignement")
 getwd()
@@ -19,7 +21,7 @@ library(seqinr)
 library(bios2mds)
 
 
-# Importation de fichiers en format fasta-Attention, sur chaque fichier .fas, on doit faire enter à la dernière ligne
+# Importation de fichiers en format fasta-Attention, sur chaque fichier .fas, on doit faire enter ? la derni?re ligne
 dir()
 seq1=read.fasta("1.fas")
 seq2=read.fasta("2.fas")
@@ -39,40 +41,40 @@ str(seq3) #603
 as.character(seq3[[1]])
 summary(seq3)
 
-str(seq4) #contient 5 séquences#
+str(seq4) #contient 5 s?quences#
 as.character(seq4[[1]])
 summary(seq4)
 
 
 #####################################
-###Traitement des séquences-autre façon d'importer des séquences-format DNAbin.
+###Traitement des s?quences-autre fa?on d'importer des s?quences-format DNAbin.
 
 install.packages (seqinr)
 library (seqinr)
 
-help(read.dna)#on voit la description des différents éléments de la fonction-dans la librairie ape
+help(read.dna)#on voit la description des diff?rents ?l?ments de la fonction-dans la librairie ape
 
 Sequence1=read.dna("1.fas", format = "fasta", as.matrix = FALSE)
-#lorsqu'on écrit as.matrix=false, alors les séquences prendront toujours la forme d'une liste et non d'une matrice, important si séquences delongueur différentes
+#lorsqu'on ?crit as.matrix=false, alors les s?quences prendront toujours la forme d'une liste et non d'une matrice, important si s?quences delongueur diff?rentes
 
-str(Sequence1)#cette fonction transforme les données en DNAbin#
+str(Sequence1)#cette fonction transforme les donn?es en DNAbin#
 summary(Sequence1)
 class(Sequence1)
 
 Sequence15=read.dna ("15.fas", format="fasta", as.matrix=FALSE)
-str(Sequence15) #C'est quoi la série de chiffres qui suit la longueur de la séquence#
+str(Sequence15) #C'est quoi la s?rie de chiffres qui suit la longueur de la s?quence#
 summary(Sequence15)
 class(Sequence15)
 print(Sequence15)
 
 #Codecomplet=read.dna(".fas", format = "fasta", skip = 1,comment.char = "#",as.character = TRUE, as.matrix = FALSE)#
 
-#Pour que les différents exécutables fonctionnent, il faut que les programmes soient directement installés sur le C#
+#Pour que les diff?rents ex?cutables fonctionnent, il faut que les programmes soient directement install?s sur le C#
 seqalign=clustal(Sequence15, pw.gapopen = 10, pw.gapext = 0.1,gapopen = 10, gapext = 0.2, exec = "C:\\ClustalW2\\clustalw2.exe", quiet = TRUE, original.ordering = TRUE)
 
-#Examiner l'objet qui a été crée
+#Examiner l'objet qui a ?t? cr?e
 class(seqalign)
-print(seqalign)#les séquences sont dans un format binaire et placées dans une matrice, toutes les séquences ont la même longueur et on voit la composition des différentes bases
+print(seqalign)#les s?quences sont dans un format binaire et plac?es dans une matrice, toutes les s?quences ont la m?me longueur et on voit la composition des diff?rentes bases
 image(seqalign)#nous donne l'image de l'alignement
 mode(seqalign)#raw
 str(seqalign)
@@ -83,11 +85,11 @@ class(matricetest)#on obtient une matrice
 print(matricetest)#regarder la matrice produite
 fix(matricetest)
 
-write.table(matricetest,"matricetest.txt", sep=";", row.names=TRUE, col.names=TRUE)#le nom des colonnes et des lignes disparaît
+write.table(matricetest,"matricetest.txt", sep=";", row.names=TRUE, col.names=TRUE)#le nom des colonnes et des lignes dispara?t
 
-write.table(matricetest,"matrice1test.txt",  sep=";", row.names=FALSE, col.names=TRUE)#le nom des colonnes et des lignes disparaît et on peut mettre les lignes  et pas les colonnes
+write.table(matricetest,"matrice1test.txt",  sep=";", row.names=FALSE, col.names=TRUE)#le nom des colonnes et des lignes dispara?t et on peut mettre les lignes  et pas les colonnes
 
-write.csv2(matricetest,"matrice2test.csv", row.names=TRUE)#le nom des colonnes et des lignes disparaît et on peut mettre les lignes  et pas les colonnes
+write.csv2(matricetest,"matrice2test.csv", row.names=TRUE)#le nom des colonnes et des lignes dispara?t et on peut mettre les lignes  et pas les colonnes
 
 
 
@@ -97,29 +99,29 @@ seqalign=clustal(Sequence15, pw.gapopen = 10, pw.gapext = 0.1,gapopen = 10, gape
 
 warnings()
 
-#lire le fichier d'alignement qui a été produit directement dans r
-#pour que cela fonctionne il faut mettre le fichier aln dans notre working directory ou alors spécifier l'emplacement du fichier
+#lire le fichier d'alignement qui a ?t? produit directement dans r
+#pour que cela fonctionne il faut mettre le fichier aln dans notre working directory ou alors sp?cifier l'emplacement du fichier
 Sequence15a=read.dna("input_clustal.aln", format="clustal", as.matrix=FALSE)
 fix(Sequence15a)
 fix(Sequence15)
 class(Sequence15a)
-#je ne comprends pas pourquoi le fichier n'a pas la même forme que celui des séquences pas alignées; les noms de variables sont à la suite.
+#je ne comprends pas pourquoi le fichier n'a pas la m?me forme que celui des s?quences pas align?es; les noms de variables sont ? la suite.
 
-#deuxième facon de lire un alignement dans r; les formats possibles sont fasta, mase, phylip, msf, clustal
+#deuxi?me facon de lire un alignement dans r; les formats possibles sont fasta, mase, phylip, msf, clustal
 Sequencealigne=read.alignment (file="input_clustal.aln", format="clustal", forceToLower=TRUE)
 class(Sequencealigne)#class=alignement
-fix(Sequencealigne)#vérifier avec des séquences qui ont des longueurs différentes
+fix(Sequencealigne)#v?rifier avec des s?quences qui ont des longueurs diff?rentes
 
-#pour avoir l'image de l'alignement, et on appuie sur zoom pour la voir en détails
-image(Sequence15a)#pour fonctionner, l'objet doit être une matrice
+#pour avoir l'image de l'alignement, et on appuie sur zoom pour la voir en d?tails
+image(Sequence15a)#pour fonctionner, l'objet doit ?tre une matrice
 mode(Sequence15a)#raw#
 
-#Lire l'arbre intermédiaire utilisé pourl'alignement
+#Lire l'arbre interm?diaire utilis? pourl'alignement
 #Dans le code, le nom de l'arbre n'apparait pas
 arbre=read.tree(file="input_clustal.dnd", tree.names="arbre1") #imprimer a la console l'arbre sous forme de texte
 write.tree(arbre)#print tree in newick format
-plot(arbre)  #Génere le graphique
-class(arbre)# l'objet créé est de classe phylo
+plot(arbre)  #G?nere le graphique
+class(arbre)# l'objet cr?? est de classe phylo
 summary(arbre)
 
 
@@ -127,28 +129,28 @@ summary(arbre)
 http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/src/chapter5.html
 ###############
 
-#Faire une matrice de distance à partir d'un alignement multiple de clustal
+#Faire une matrice de distance ? partir d'un alignement multiple de clustal
 matrice1k80=dist.dna(Sequence15a, model="K80", variance=FALSE, gamma=FALSE, pairwise.deletion=FALSE, base.freq=NULL, as.matrix=FALSE)#fait une matrice triangulaire#
 matrice3K80=dist.dna(Sequence15a, model="K80", variance=FALSE, gamma=FALSE, pairwise.deletion=FALSE, base.freq=NULL, as.matrix=TRUE)#fait une matrice rectangulaire#
-class(matrice1k80)#créer objet sous la forme dist
-print(matrice1k80)#permet de voir l'objet à l'écran
-class(matrice3K80)#créer objet sous la forme matrice
-print(matrice3K80)#permet de voir l'objet à l'écran
+class(matrice1k80)#cr?er objet sous la forme dist
+print(matrice1k80)#permet de voir l'objet ? l'?cran
+class(matrice3K80)#cr?er objet sous la forme matrice
+print(matrice3K80)#permet de voir l'objet ? l'?cran
 fix(matrice3k80)
 fix(matrice1k80)#pourquoi le fix ne fonctionne pas tout le temps?
 
-#Mettre le contenu de l'objet crée sous la forme matrice dans un fichier-attention ne fonctionne pas si sous la forme dist
+#Mettre le contenu de l'objet cr?e sous la forme matrice dans un fichier-attention ne fonctionne pas si sous la forme dist
 write.table(matrice3K80,"matrice3k80.txt", sep="\t")
 
 
 
-#Faire une matrice distance la plus simple-sans aucun modèle évolutif
+#Faire une matrice distance la plus simple-sans aucun mod?le ?volutif
 dist.gene(Sequence15a, method = "pairwise", pairwise.deletion = FALSE,variance = FALSE)
-#avec la méthode pairwise; le chiffre représente le nombre de nucleotides qui diffèrent entre les deux séquences
+#avec la m?thode pairwise; le chiffre repr?sente le nombre de nucleotides qui diff?rent entre les deux s?quences
 
-#on dirait que ca fonctionne avec un objet DNAbin??, le résul
+#on dirait que ca fonctionne avec un objet DNAbin??, le r?sul
 dist.gene(Sequence15a, method = "percentage", pairwise.deletion = FALSE,variance = FALSE)
-#lorsque la méthode est percentage, le nombre de nucléotides qui diffèrent est divisé par le nombre de nucléotide dans les séquences
+#lorsque la m?thode est percentage, le nombre de nucl?otides qui diff?rent est divis? par le nombre de nucl?otide dans les s?quences
 
 clustal()
 
@@ -160,7 +162,7 @@ tcoffee(x, exec = "t_coffee", MoreArgs = "", quiet = TRUE, original.ordering = T
 
 ###Aligner avec muscle dans package ape
 install.packages("muscle")#installer d'abord le package muscle sur l'ordinateur http://cran.r-project.org/web/packages/muscle/index.html- version windows release
-library(muscle)#désinstaller d'abord le package seqinr
+library(muscle)#d?sinstaller d'abord le package seqinr
 
 Seqtest=read.dna("15.fas", format = "fasta", as.matrix = FALSE)
 Seqtest
@@ -174,12 +176,12 @@ print(align)
 
 write.fasta(align,"align2.txt")
 
-#Trouver le bon modèle évolutif
+#Trouver le bon mod?le ?volutif
 
 
 
 
-########Identifier des clusters parmi les séquences
+########Identifier des clusters parmi les s?quences
 class(seqalign)
 fix(seqalign)
 
@@ -206,13 +208,13 @@ try=import.fasta(seqalign,aa.to.upper=TRUE, gap.to.dash=TRUE)#Error in readLines
 
 
 #########################################################################################
-#pas disponible avec la verion 3.0.2, la librairie nécessite R 3.1.0
+#pas disponible avec la verion 3.0.2, la librairie n?cessite R 3.1.0
 install.packages("Biostrings")
 library(Biostrings)
 ######################################################################################
 
 install.packages("phangorn")
-library(phangorn)#compilé avec la version r3.0.3, le package ape est nécessaire à l'installation de phangorn
+library(phangorn)#compil? avec la version r3.0.3, le package ape est n?cessaire ? l'installation de phangorn
 
 
 
@@ -315,7 +317,7 @@ summary(view)
 #dim() et doit reflÃ©ter le nombre d'Ã©lÃ©ment de l'objet 
 y=1:24;y
 mode(y);class(y);str(y)
-dim(y)=c(2,4,3) # 2=rows 4=cols  3=dimension;pour créer cela, nous avons absolument besoin
+dim(y)=c(2,4,3) # 2=rows 4=cols  3=dimension;pour cr?er cela, nous avons absolument besoin
 mode(y);class(y);str(y);summary(y)
 y
 
@@ -326,7 +328,7 @@ class(w)
 
 
 #2.8.1  MATRICE IS A 2 DIM ARRAY CONTAINING ONLY NUMBERS ===============
-(X=matrix(c(1,0,0,0,1,0,0,0,1),nrow=3)) #col-wise nrow=ncol, touche la même valeur
+(X=matrix(c(1,0,0,0,1,0,0,0,1),nrow=3)) #col-wise nrow=ncol, touche la m?me valeur
 attributes(X) # donne la dimension 3X3
 
 #diffÃ©rence entre vector et matrice
@@ -348,7 +350,7 @@ colnames(X)=drug.names; X
 
 #2.8.3 Calculation on rows or cols of the matrix=============================
 rowMeans(X) # ou 
-apply(X,1,mean)  #1=row  les éléments: 1-matrice (objet), 2-1(row) ou 2(col) (margin), moyenne (function)
+apply(X,1,mean)  #1=row  les ?l?ments: 1-matrice (objet), 2-1(row) ou 2(col) (margin), moyenne (function)
 apply(X,1,max)
 
 colMeans(X) 
@@ -373,16 +375,16 @@ chalk <- c("limestone", "marl","oolite", "CaC03")
 cheese <- c(3.2-4.5i,12.8+2.2i)
 (items <- list(apples,oranges,chalk,cheese))
 
-items[[3]][2] #bonne facon  [[3]][2] spécifie le vecteur et l'index de la position que l'on cherche
+items[[3]][2] #bonne facon  [[3]][2] sp?cifie le vecteur et l'index de la position que l'on cherche
 class(items)
 
 
-#list avec des alias pour chaque Ã©lÃ©ment; et éléments pas tous du même type
+#list avec des alias pour chaque Ã©lÃ©ment; et ?l?ments pas tous du m?me type
 items <- list(first=apples,second=oranges,third=chalk,fourth=cheese)# On peut donner des noms versus des braquets double
 items
 items$third[2] # specifie vecteur et l'index de la position que l'on cherche
-# lapply() appliquer une fonction aux éléments d'une liste
-lapply(items,length)#longeur de chaque élément de la liste  lapply(objet,function)
+# lapply() appliquer une fonction aux ?l?ments d'une liste
+lapply(items,length)#longeur de chaque ?l?ment de la liste  lapply(objet,function)
 
 str(items)
 summary(items)
@@ -392,9 +394,9 @@ summary(items)
 letters
 LETTERS
 noquote(letters)#sans les (")
-nchar(letters)#Count the Number of Characters de chaque élément du vecteur
+nchar(letters)#Count the Number of Characters de chaque ?l?ment du vecteur
 paste("prefix","mid","suffix",sep="_/_")
-paste("A", 1:6, sep = ";") #concatène A et chaque chiffre et met un ; entre chaque truc qui sont concaténés
+paste("A", 1:6, sep = ";") #concat?ne A et chaque chiffre et met un ; entre chaque truc qui sont concat?n?s
 
 
 
@@ -428,11 +430,11 @@ med <- function(x) {
 #2.16.4 Saving data produced whitin R to disc====
 nbnumbers <- rnbinom(1000, size=1, mu=1.2) 
 nbnumbers
-write(nbnumbers,".//temp//nbnumbers.txt",1)# le chiffre indique le nombre de colonne dans laquelle la variable va se distribuée
+write(nbnumbers,".//temp//nbnumbers.txt",1)# le chiffre indique le nombre de colonne dans laquelle la variable va se distribu?e
 write(nbnumbers,".//temp//nbnumbers.txt",5)
 
 #write.table pour les matrice et dataframe 
-(nbtable <- table(nbnumbers))# Pour chacun des éléments différents du vecteur, il liste le nombre de fois qu'il apparaît
+(nbtable <- table(nbnumbers))# Pour chacun des ?l?ments diff?rents du vecteur, il liste le nombre de fois qu'il appara?t
 #If you want to save both the counts and their frequencies in adjacent columns, use
 write.table(nbtable,".//temp//table.txt",col.names=F,row.names=F)# premiere ligne et colonne ne sont pas des noms
 #if you only want to export a single column of frequencies (445, 248, . . . ) use
@@ -441,9 +443,9 @@ write.table(unclass(nbtable),".//temp//table.txt",col.names=F,row.names=F)
 
 
 #save(x, y, z, file = "export.RData") #Sauve ces variables dans un fichier que je nomme export.
-#load("export.RData")#,Je peux ensuite rappeler ces données. Si je ne mets pas ed chemin, alors il va chercher les données dans le working directory
+#load("export.RData")#,Je peux ensuite rappeler ces donn?es. Si je ne mets pas ed chemin, alors il va chercher les donn?es dans le working directory
 
-save.image()# Sauve l'environnement, console, et variables que j'ai crées et qui sont listées par le ls
+save.image()# Sauve l'environnement, console, et variables que j'ai cr?es et qui sont list?es par le ls
 ls()
 
 
@@ -461,7 +463,7 @@ ls()
 \v  vertical tab
 
 
-dir()   #liste contenu du répertoire courant, sert a vérifier si nous avons un fichier que nous cherchons. On peut aussi ajouter un nom de répertoire dans lequel nous voulons chercher
+dir()   #liste contenu du r?pertoire courant, sert a v?rifier si nous avons un fichier que nous cherchons. On peut aussi ajouter un nom de r?pertoire dans lequel nous voulons chercher
 dir(".//temp") #
 dir(".//pdf")
 file.exists("tr.tre")# Nous dit si le fichier est la ou pas, true ou false
@@ -472,7 +474,7 @@ file.exists("toto.toto")
 #for tab-delimited fields with decimal points as a commas, use read.delim2("c:\\temp\\file.txt").
 #je peux aussi via un package importer directement des ficheirs SAS
 #as.is pour empecher la convertion en factor du vector de string
-murder <- read.table(".//temp//murders.txt",header=T,as.is="region")#as.is : à l'importation ne pas transformer en factor, prend le tel quel
+murder <- read.table(".//temp//murders.txt",header=T,as.is="region")#as.is : ? l'importation ne pas transformer en factor, prend le tel quel
 head(murder)
 
 str(murder)
@@ -482,7 +484,7 @@ mode(murder$state)
 attributes(murder)
 levels(murder$state)
 levels(murder$region)
-which(levels(murder$state)=="Utah")#which fait un filtre; on peut spécifier des conditions
+which(levels(murder$state)=="Utah")#which fait un filtre; on peut sp?cifier des conditions
 murder$state[which(levels(murder$state)==?"Alabama")]
 
 
@@ -498,7 +500,7 @@ worms[,3]#la col 3 au complet
 worms[3,]#la row 3 au complet
 worms[,c(1,5)]#toutes les lignes pour seulement les colonnes 1 et 5
 
-worms$area #on doit faire ca a la place de attach car si j'ai deux colonnes dans deux dataframes differents qui s'appelent area, alors ca peut créer des confilts
+worms$area #on doit faire ca a la place de attach car si j'ai deux colonnes dans deux dataframes differents qui s'appelent area, alors ca peut cr?er des confilts
 
 
 
@@ -519,7 +521,7 @@ data[,x > y] #use a logical test (x > y) to select all rows from certain columns
 data[,c(1:m,i,j,k)] #add duplicate copies of columns i, j, and k to the dataframe
 data[x > y,a != b] #extract certain rows (x > y) and certain columns (a != b)
 data[c(1:n,i,j,k),] #add duplicate copies of rows i, j, and k to the dataframe
-#data fait seulement afficher les sélections, si je veux mettre le contenu dans une variable, alors je dois creer une variable
+#data fait seulement afficher les s?lections, si je veux mettre le contenu dans une variable, alors je dois creer une variable
 
 #4.3 Sorting dataframes ====
 worms[order(worms$Slope,decreasing=T),]#tri sur col slope d?croissant
@@ -576,7 +578,7 @@ nums[order(nums$date),]#tri mal fait
 nums[order(nums$dates),]#maintenant le tri sera bien fait
 
 
-install.packages("questionr") # installe un package qui n'est pas encore installé sur notre ordi
+install.packages("questionr") # installe un package qui n'est pas encore install? sur notre ordi
 library(questionr) # Active (on pourrait aller cocher dans onglet package)
 ## Jeu de donnees hdv2003
 
@@ -584,11 +586,11 @@ data(hdv2003)
 (d <- hdv2003)
 names(d)
 head(d)
-fix(d)  #Fait apparaître le dataframe directement à l,écran
+fix(d)  #Fait appara?tre le dataframe directement ? l,?cran
 d$qualif # Affiche seulement cette variable
 iorder(d, "qualif") d$qualif <- factor(d$qualif, levels=c("Ouvrier specialise", "Ouvrier qualifie", "Technicien", "Profession intermediaire", "Cadre", "Employe", "Autre"))
 d$qualif <- factor(d$qualif, levels=c("Ouvrier specialise", "Ouvrier qualifie", "Technicien", "Profession intermediaire", "Cadre", "Employe", "Autre"))
-# nous dirige vers un générateur web qui nous aide à faire du code, on peut ensuite coller to clipboard,pour ensuite conserver le code dans notre script.
+# nous dirige vers un g?n?rateur web qui nous aide ? faire du code, on peut ensuite coller to clipboard,pour ensuite conserver le code dans notre script.
 
 iorder(d,"relig")
 icut(d, age)#ouvre une page web
@@ -625,7 +627,7 @@ library(seqinr)
 
 tr1=read.tree(text="(a:1,b:4);") #imprimer a la console l'arbre sous forme de texte
 write.tree(tr1)#print tree in newick format
-plot(tr1)  #Génere le graphique
+plot(tr1)  #G?nere le graphique
 
 tr1=read.tree(text="(((B:0.05,C:0.05):0.01,D:0.06):0.04,A:0.1);") #donne la longueur de chacun des segments
 write.tree(tr1)#print tree in newick format
@@ -717,7 +719,7 @@ plot(tr1)
 
 a="(a:1,b:1);"
 tr=read.tree(text=a)
-str(tr)  #arbre est une liste, ensemble de type diffférents, structure est complexe
+str(tr)  #arbre est une liste, ensemble de type difff?rents, structure est complexe
 
 
 
@@ -740,7 +742,7 @@ rampho$req[[1]]
 #x=getSequence(rampho)#pour rÃ©cupÃ©rer les seq (ATTENTION !!  na pas marchÃ©)
 
 y=read.GenBank("AF310048")
-as.character(y[[1]])  #y=liste de 1 élément
+as.character(y[[1]])  #y=liste de 1 ?l?ment
 str(y)
 y=read.GenBank("AB531656")
 as.character(y[[1]])
@@ -753,7 +755,7 @@ Rampho <- read.GenBank(ref)
 attr(Rampho, "species")
 cbind(attr(Rampho, "species"), names(Rampho))
 cat(Rampho[[2]], "\n", sep = "") #2818181848488818....  #Donne acces au deuxieme element
-as.character(Rampho[[1]])   #[1] "c" "t" "t" "t" "g" "g" "a"ç
+as.character(Rampho[[1]])   #[1] "c" "t" "t" "t" "g" "g" "a"?
 str(Rampho)
 #on peut acceder a chaque element en utilisant les bracquets
 
@@ -772,7 +774,7 @@ str(Rampho)
 #write.tree() in newick format
 write.tree(tr)
 write.tree(tr,file="tr.tre")#enregistere dans un ficher
-write.nexus(tr)  #écrit la structure d'un fichier nexus
+write.nexus(tr)  #?crit la structure d'un fichier nexus
 
 #3.4 Manipulating Data-marche pas====
 tr=read.tree(text="((a:1,b:1):1,(c:1,d:1):1);")

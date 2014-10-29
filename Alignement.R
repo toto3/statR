@@ -1,6 +1,7 @@
 
 #modif 1
 #modif 2
+#modif 3
 
 #Script pour l'importation de s?quences et l'alignement
 # Le signe diese faire shift 3
