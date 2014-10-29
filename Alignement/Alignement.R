@@ -6,7 +6,7 @@
 # les doubles guillemets-shift+point
 #�crire-le nom de la fonction sans parenth�se et on a le code source qui s'affiche
 
-modif2
+modif23
 
 setwd("~/Rcran/Alignement")
 getwd()
