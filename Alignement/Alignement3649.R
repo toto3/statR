@@ -1,11 +1,11 @@
 
-#Script pour l'importation de séquences et l'alignement
+#Script pour l'importation de s?quences et l'alignement
 # Le signe diese faire shift 3
-# le signe \ doit toujours être doublé car sinon en programmation, il annonce les caractères suivants donc mettre \\
+# le signe \ doit toujours ?tre doubl? car sinon en programmation, il annonce les caract?res suivants donc mettre \\
 # []-les bracquets se font avec altcar et 9, 0
 # les doubles guillemets-shift+point
-#Écrire-le nom de la fonction sans parenthèse et on a le code source qui s'affiche
-
+#?crire-le nom de la fonction sans parenth?se et on a le code source qui s'affiche
+#
 setwd("~/Rcran/Alignement")
 getwd()
 
@@ -19,42 +19,42 @@ library(seqinr)
 library(bios2mds)
 
 
-# Importation de fichiers en format fasta-Attention, sur chaque fichier .fas, on doit faire enter à la dernière ligne
+# Importation de fichiers en format fasta-Attention, sur chaque fichier .fas, on doit faire enter ? la derni?re ligne
 dir()
 
 seq3649=read.fasta ("3649seq2014-06-20.fas")
-str(seq3649) #contient x séquences#
+str(seq3649) #contient x s?quences#
 as.character(seq3649[[1]])
 summary(seq3649)
 
 
 #####################################
-###Traitement des séquences-autre façon d'importer des séquences-format DNAbin.
+###Traitement des s?quences-autre fa?on d'importer des s?quences-format DNAbin.
 
 install.packages (seqinr)
 library (seqinr)
 
-help(read.dna)#on voit la description des différents éléments de la fonction-dans la librairie ape
+help(read.dna)#on voit la description des diff?rents ?l?ments de la fonction-dans la librairie ape
 
 
 
 Sequence3649=read.dna ("3649seq2014-06-20.fas", format="fasta", as.matrix=FALSE)
-str(Sequence3649) #C'est quoi la série de chiffres qui suit la longueur de la séquence#
+str(Sequence3649) #C'est quoi la s?rie de chiffres qui suit la longueur de la s?quence#
 summary(Sequence3649)
 class(Sequence3649)
 print(Sequence3649)
 
 #Codecomplet=read.dna(".fas", format = "fasta", skip = 1,comment.char = "#",as.character = TRUE, as.matrix = FALSE)#
 
-#Pour que les différents exécutables fonctionnent, il faut que les programmes soient directement installés sur le C#
+#Pour que les diff?rents ex?cutables fonctionnent, il faut que les programmes soient directement install?s sur le C#
 seqalign=clustal(Sequence3649, pw.gapopen = 10, pw.gapext = 0.1,gapopen = 10, gapext = 0.2, exec = "C:\\ClustalW2\\clustalw2.exe", quiet = FALSE, original.ordering = TRUE)
 
 
 seqalign=clustal(Sequence3649, pw.gapopen = 10, pw.gapext = 0.1,gapopen = 10, gapext = 0.2, exec = "C:\\ClustalX2\\clustalX.exe", quiet = TRUE, original.ordering = TRUE)
 
-#Examiner l'objet qui a été crée
+#Examiner l'objet qui a ?t? cr?e
 class(seqalign)
-print(seqalign)#les séquences sont dans un format binaire et placées dans une matrice, toutes les séquences ont la même longueur et on voit la composition des différentes bases
+print(seqalign)#les s?quences sont dans un format binaire et plac?es dans une matrice, toutes les s?quences ont la m?me longueur et on voit la composition des diff?rentes bases
 image(seqalign)#nous donne l'image de l'alignement
 mode(seqalign)#raw
 str(seqalign)
@@ -65,11 +65,11 @@ class(matricetest)#on obtient une matrice
 print(matricetest)#regarder la matrice produite
 fix(matricetest)
 
-write.table(matricetest,"matricetest.txt", sep=";", row.names=TRUE, col.names=TRUE)#le nom des colonnes et des lignes disparaît
+write.table(matricetest,"matricetest.txt", sep=";", row.names=TRUE, col.names=TRUE)#le nom des colonnes et des lignes dispara?t
 
-write.table(matricetest,"matrice1test.txt",  sep=";", row.names=FALSE, col.names=TRUE)#le nom des colonnes et des lignes disparaît et on peut mettre les lignes  et pas les colonnes
+write.table(matricetest,"matrice1test.txt",  sep=";", row.names=FALSE, col.names=TRUE)#le nom des colonnes et des lignes dispara?t et on peut mettre les lignes  et pas les colonnes
 
-write.csv2(matricetest,"matrice2test.csv", row.names=TRUE)#le nom des colonnes et des lignes disparaît et on peut mettre les lignes  et pas les colonnes
+write.csv2(matricetest,"matrice2test.csv", row.names=TRUE)#le nom des colonnes et des lignes dispara?t et on peut mettre les lignes  et pas les colonnes
 
 
 
@@ -79,29 +79,29 @@ seqalign=clustal(Sequence3649, pw.gapopen = 10, pw.gapext = 0.1,gapopen = 10, ga
 
 warnings()
 
-#lire le fichier d'alignement qui a été produit directement dans r
-#pour que cela fonctionne il faut mettre le fichier aln dans notre working directory ou alors spécifier l'emplacement du fichier
+#lire le fichier d'alignement qui a ?t? produit directement dans r
+#pour que cela fonctionne il faut mettre le fichier aln dans notre working directory ou alors sp?cifier l'emplacement du fichier
 Sequence3649a=read.dna("input_clustal.aln", format="clustal", as.matrix=FALSE)
 fix(Sequence3649a)
 fix(Sequence3649)
 class(Sequence3649a)
-#je ne comprends pas pourquoi le fichier n'a pas la même forme que celui des séquences pas alignées; les noms de variables sont à la suite.
+#je ne comprends pas pourquoi le fichier n'a pas la m?me forme que celui des s?quences pas align?es; les noms de variables sont ? la suite.
 
-#deuxième facon de lire un alignement dans r; les formats possibles sont fasta, mase, phylip, msf, clustal
+#deuxi?me facon de lire un alignement dans r; les formats possibles sont fasta, mase, phylip, msf, clustal
 Sequencealigne=read.alignment (file="input_clustal.aln", format="clustal", forceToLower=TRUE)
 class(Sequencealigne)#class=alignement
-fix(Sequencealigne)#vérifier avec des séquences qui ont des longueurs différentes
+fix(Sequencealigne)#v?rifier avec des s?quences qui ont des longueurs diff?rentes
 
-#pour avoir l'image de l'alignement, et on appuie sur zoom pour la voir en détails
-image(Sequence3649a)#pour fonctionner, l'objet doit être une matrice
+#pour avoir l'image de l'alignement, et on appuie sur zoom pour la voir en d?tails
+image(Sequence3649a)#pour fonctionner, l'objet doit ?tre une matrice
 mode(Sequence3649a)#raw#
 
-#Lire l'arbre intermédiaire utilisé pourl'alignement
+#Lire l'arbre interm?diaire utilis? pourl'alignement
 #Dans le code, le nom de l'arbre n'apparait pas
 arbre=read.tree(file="input_clustal.dnd", tree.names="arbre1") #imprimer a la console l'arbre sous forme de texte
 write.tree(arbre)#print tree in newick format
-plot(arbre)  #Génere le graphique
-class(arbre)# l'objet créé est de classe phylo
+plot(arbre)  #G?nere le graphique
+class(arbre)# l'objet cr?? est de classe phylo
 summary(arbre)
 
 
@@ -109,28 +109,28 @@ summary(arbre)
 http://a-little-book-of-r-for-bioinformatics.readthedocs.org/en/latest/src/chapter5.html
 ###############
 
-#Faire une matrice de distance à partir d'un alignement multiple de clustal
+#Faire une matrice de distance ? partir d'un alignement multiple de clustal
 matrice1k80=dist.dna(Sequence3649a, model="K80", variance=FALSE, gamma=FALSE, pairwise.deletion=FALSE, base.freq=NULL, as.matrix=FALSE)#fait une matrice triangulaire#
 matrice3K80=dist.dna(Sequence3649a, model="K80", variance=FALSE, gamma=FALSE, pairwise.deletion=FALSE, base.freq=NULL, as.matrix=TRUE)#fait une matrice rectangulaire#
-class(matrice1k80)#créer objet sous la forme dist
-print(matrice1k80)#permet de voir l'objet à l'écran
-class(matrice3K80)#créer objet sous la forme matrice
-print(matrice3K80)#permet de voir l'objet à l'écran
+class(matrice1k80)#cr?er objet sous la forme dist
+print(matrice1k80)#permet de voir l'objet ? l'?cran
+class(matrice3K80)#cr?er objet sous la forme matrice
+print(matrice3K80)#permet de voir l'objet ? l'?cran
 fix(matrice3k80)
 fix(matrice1k80)#pourquoi le fix ne fonctionne pas tout le temps?
 
-#Mettre le contenu de l'objet crée sous la forme matrice dans un fichier-attention ne fonctionne pas si sous la forme dist
+#Mettre le contenu de l'objet cr?e sous la forme matrice dans un fichier-attention ne fonctionne pas si sous la forme dist
 write.table(matrice3K80,"matrice3k80.txt", sep="\t")
 
 
 
-#Faire une matrice distance la plus simple-sans aucun modèle évolutif
+#Faire une matrice distance la plus simple-sans aucun mod?le ?volutif
 dist.gene(Sequence3649a, method = "pairwise", pairwise.deletion = FALSE,variance = FALSE)
-#avec la méthode pairwise; le chiffre représente le nombre de nucleotides qui diffèrent entre les deux séquences
+#avec la m?thode pairwise; le chiffre repr?sente le nombre de nucleotides qui diff?rent entre les deux s?quences
 
-#on dirait que ca fonctionne avec un objet DNAbin??, le résul
+#on dirait que ca fonctionne avec un objet DNAbin??, le r?sul
 dist.gene(Sequence3649a, method = "percentage", pairwise.deletion = FALSE,variance = FALSE)
-#lorsque la méthode est percentage, le nombre de nucléotides qui diffèrent est divisé par le nombre de nucléotide dans les séquences
+#lorsque la m?thode est percentage, le nombre de nucl?otides qui diff?rent est divis? par le nombre de nucl?otide dans les s?quences
 
 
 
@@ -151,7 +151,7 @@ tcoffee(x, exec = "t_coffee", MoreArgs = "", quiet = TRUE, original.ordering = T
 
 ###Aligner avec muscle dans package ape
 install.packages("muscle")#installer d'abord le package muscle sur l'ordinateur http://cran.r-project.org/web/packages/muscle/index.html- version windows release
-library(muscle)#désinstaller d'abord le package seqinr
+library(muscle)#d?sinstaller d'abord le package seqinr
 
 Seqtest=read.dna("15.fas", format = "fasta", as.matrix = FALSE)
 Seqtest
@@ -165,12 +165,12 @@ print(align)
 
 write.fasta(align,"align2.txt")
 
-#Trouver le bon modèle évolutif
+#Trouver le bon mod?le ?volutif
 
 
 
 
-########Identifier des clusters parmi les séquences
+########Identifier des clusters parmi les s?quences
 class(seqalign)
 fix(seqalign)
 
@@ -197,13 +197,13 @@ try=import.fasta(seqalign,aa.to.upper=TRUE, gap.to.dash=TRUE)#Error in readLines
 
 
 #########################################################################################
-#pas disponible avec la verion 3.0.2, la librairie nécessite R 3.1.0
+#pas disponible avec la verion 3.0.2, la librairie n?cessite R 3.1.0
 install.packages("Biostrings")
 library(Biostrings)
 ######################################################################################
 
 install.packages("phangorn")
-library(phangorn)#compilé avec la version r3.0.3, le package ape est nécessaire à l'installation de phangorn
+library(phangorn)#compil? avec la version r3.0.3, le package ape est n?cessaire ? l'installation de phangorn
 
 
 
